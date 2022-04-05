@@ -1,0 +1,14 @@
+module MainModule;
+
+import System;
+using System;
+
+import UnitySystem;
+using UnitySystem;
+
+
+var a = CSharpInterfaceCall(GameObject);
+
+var b = CSharpInterfaceCall(Vector3);
+
+a.transform.position = b;
