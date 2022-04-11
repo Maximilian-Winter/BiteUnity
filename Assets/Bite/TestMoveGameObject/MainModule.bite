@@ -8,6 +8,6 @@ using UnitySystem;
 
 var b = GameObjectFromUnity.transform.position;
 
-b.x += 0.0001;
+b.x += 0.001;
 
 GameObjectFromUnity.transform.position = b;
