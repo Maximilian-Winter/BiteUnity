@@ -1,0 +1,13 @@
+module MainModule;
+
+import System;
+using System;
+
+import UnitySystem;
+using UnitySystem;
+
+var b = GameObjectFromUnity.transform.position;
+
+b.x += 0.0001;
+
+GameObjectFromUnity.transform.position = b;
