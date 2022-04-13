@@ -5,9 +5,32 @@ using System;
 
 import UnitySystem;
 using UnitySystem;
+var cameraTransform;
+var targetTransform;
+var right;
 
-var b = GameObjectFromUnity.transform.position;
+sync
+{
+    cameraTransform = Camera.transform;
+    targetTransform = TransformTarget;
+}
 
-b.x += 0.001;
 
-GameObjectFromUnity.transform.position = b;
+while ( true ) 
+{
+    sync
+    {
+        cameraTransform.LookAt(targetTransform);
+        
+        right = CSharpInterfaceCall(Vector3);
+        right.x = 1 * UnityDeltaTime();
+        right.y *= UnityDeltaTime();
+        right.z *= UnityDeltaTime();
+        
+        cameraTransform.Translate(right);
+    }
+}
+
+
+
+
