@@ -16,20 +16,23 @@ sync
 }
 
 
-while ( true ) 
+    
+
+    
+while(true)
 {
     sync
     {
-        cameraTransform.LookAt(targetTransform);
-        
         right = CSharpInterfaceCall(Vector3);
         right.x = 1 * UnityDeltaTime();
         right.y *= UnityDeltaTime();
         right.z *= UnityDeltaTime();
-        
+        cameraTransform.LookAt(targetTransform);
         cameraTransform.Translate(right);
     }
 }
+
+
 
 
 

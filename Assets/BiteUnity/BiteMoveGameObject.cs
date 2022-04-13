@@ -1,19 +1,17 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Bite.Compiler;
 using Bite.Modules.Callables;
 using Bite.Runtime;
 using Bite.Runtime.CodeGen;
-using Bite.Runtime.Functions.ForeignInterface;
 using BiteUnity;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Scripting;
 
 public class DeltaTimeGetter
 {
@@ -43,7 +41,10 @@ public class BiteMoveGameObject : MonoBehaviour
             { "TransformTarget", m_TransformTarget },
         });
 
+#if UNITY_EDITOR
         EditorApplication.playModeStateChanged += EditorApplication_playModeStateChanged;
+#endif
+        
 
         IEnumerable< string > files = Directory.EnumerateFiles(
             "Assets\\Bite\\TestMoveGameObject",
@@ -55,32 +56,39 @@ public class BiteMoveGameObject : MonoBehaviour
         program = compiler.Compile(files.Select(File.ReadAllText));
 
         program.TypeRegistry.RegisterType<Vector3>();
+        program.TypeRegistry.RegisterType<GameObject>();
+        program.TypeRegistry.RegisterType<Transform>();
+        program.TypeRegistry.RegisterType<ParameterExpression>();
+        program.TypeRegistry.RegisterType<MethodCallExpression>();
+        program.TypeRegistry.RegisterType<Expression>();
         vm.RegisterSystemModuleCallables( program.TypeRegistry );
         vm.RegisterCallable( "UnityDeltaTime", new UnityDeltaTimeVmCallable() );
+        //vm.Interpret(program);
+
+        Task T = new Task( () => { } );
         Task.Run(() =>
         {
             Debug.Log("Running program");
             vm.Interpret(program);
-        }).ContinueWith(t=>
+        }).ContinueWith(t =>
         {
             Debug.Log("Stopped!");
             if (t.IsFaulted)
             {
                 Debug.LogError(t.Exception.InnerException.Message);
+                Debug.LogError(t.Exception.InnerException.StackTrace);
+                Debug.LogError(t.Exception.StackTrace);
             }
-        });       
+        });
     }
-
+#if UNITY_EDITOR
     private void EditorApplication_playModeStateChanged(PlayModeStateChange obj)
     {
         if(obj == PlayModeStateChange.ExitingPlayMode)
         {
-            vm.Stop();
+           vm.Stop();
         }
     }
-
-    private void Update()
-    {
-
-    }
+#endif
+    
 }
