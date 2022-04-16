@@ -9,7 +9,7 @@ GameObjectClass.Type = "GameObject";
 
 GameObjectClass.ReturnClass = true;
 
-GameObject = CSharpInterfaceCall(GameObjectClass);
+var GameObject = CSharpInterfaceCall(GameObjectClass);
 
 var Vector3Class = new CSharpInterface();
 
@@ -17,23 +17,19 @@ Vector3Class.Type = "Vector3";
 
 Vector3Class.ReturnClass = true;
 
-Vector3 = CSharpInterfaceCall(Vector3Class);
+var Vector3 = CSharpInterfaceCall(Vector3Class);
 
-var GameObject = new CSharpInterface();
+var Vector3Instantiator = new CSharpInterface();
 
-GameObject.Type = "GameObject";
+Vector3Instantiator.Type = "Vector3";
 
-GameObject.ConstructorArguments[0] = "Hello World";
-GameObject.ConstructorArgumentsTypes[0] = "string";
+Vector3Instantiator.ConstructorArguments[0] = 0.0;
+Vector3Instantiator.ConstructorArgumentsTypes[0] = "float";
+Vector3Instantiator.ConstructorArguments[1] = 0.0;
+Vector3Instantiator.ConstructorArgumentsTypes[1] = "float";
+Vector3Instantiator.ConstructorArguments[2] = 0.0;
+Vector3Instantiator.ConstructorArgumentsTypes[2] = "float";
 
-var Vector3 = new CSharpInterface();
-
-Vector3.Type = "Vector3";
-
-Vector3.ConstructorArguments[0] = 42;
-Vector3.ConstructorArgumentsTypes[0] = "string";
-Vector3.ConstructorArguments[1] = 42;
-Vector3.ConstructorArgumentsTypes[1] = "string";
-Vector3.ConstructorArguments[2] = 42;
-Vector3.ConstructorArgumentsTypes[2] = "string";
+extern callable function UnityDeltaTime ();
+extern callable function UnityInstantiate ();
 

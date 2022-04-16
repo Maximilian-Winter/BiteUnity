@@ -6,9 +6,46 @@ using System;
 import UnitySystem;
 using UnitySystem;
 
+Vector3Instantiator.ConstructorArguments[0] = 0.0;
+Vector3Instantiator.ConstructorArguments[1] = 2.0;
+Vector3Instantiator.ConstructorArguments[2] = -6.0;
 
-var a = CSharpInterfaceCall(GameObject);
+var gameObjectPosition = CSharpInterfaceCall(Vector3Instantiator);
+var gameObject;
 
-var b = CSharpInterfaceCall(Vector3);
+sync
+{
+    gameObject = UnityInstantiate(PrefabFromUnity, "Hello Sphere!");
+    gameObject.transform.position = gameObjectPosition;
+}
 
-a.transform.position = b;
+var getDown = true;
+var getUp = false;
+
+while(true)
+{
+    sync
+    {
+        if(gameObjectPosition.y > 1.9 && getDown)
+        {
+            gameObjectPosition.y -= 0.1 * UnityDeltaTime();
+            if(gameObjectPosition.y < 1.9)
+            {
+                getDown = false;
+                getUp = true;
+            }
+        }
+        
+        if(gameObjectPosition.y < 2.1 && getUp)
+        {
+            gameObjectPosition.y += 0.1 * UnityDeltaTime();
+            if(gameObjectPosition.y > 2.1)
+            {
+                getDown = true;
+                getUp = false;
+            }
+        }
+
+        gameObject.transform.position = gameObjectPosition;
+    }
+}

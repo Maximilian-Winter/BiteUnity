@@ -7,13 +7,12 @@ import UnitySystem;
 using UnitySystem;
 var cameraTransform;
 var targetTransform;
-var right;
+var right = CSharpInterfaceCall(Vector3Instantiator);
 
 sync
 {
     cameraTransform = Camera.transform;
     targetTransform = TransformTarget;
-    right = CSharpInterfaceCall(Vector3Instantiator);
 }
 
 
