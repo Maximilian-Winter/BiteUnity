@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -44,7 +45,6 @@ public class BiteMoveGameObject : MonoBehaviour
 #if UNITY_EDITOR
         EditorApplication.playModeStateChanged += EditorApplication_playModeStateChanged;
 #endif
-        
 
         IEnumerable< string > files = Directory.EnumerateFiles(
             "Assets\\Bite\\TestMoveGameObject",
@@ -58,14 +58,8 @@ public class BiteMoveGameObject : MonoBehaviour
         program.TypeRegistry.RegisterType<Vector3>();
         program.TypeRegistry.RegisterType<GameObject>();
         program.TypeRegistry.RegisterType<Transform>();
-        program.TypeRegistry.RegisterType<ParameterExpression>();
-        program.TypeRegistry.RegisterType<MethodCallExpression>();
-        program.TypeRegistry.RegisterType<Expression>();
         vm.RegisterSystemModuleCallables( program.TypeRegistry );
         vm.RegisterCallable( "UnityDeltaTime", new UnityDeltaTimeVmCallable() );
-        //vm.Interpret(program);
-
-        Task T = new Task( () => { } );
         Task.Run(() =>
         {
             Debug.Log("Running program");
@@ -81,6 +75,7 @@ public class BiteMoveGameObject : MonoBehaviour
             }
         });
     }
+    
 #if UNITY_EDITOR
     private void EditorApplication_playModeStateChanged(PlayModeStateChange obj)
     {

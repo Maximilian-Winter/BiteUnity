@@ -13,6 +13,7 @@ sync
 {
     cameraTransform = Camera.transform;
     targetTransform = TransformTarget;
+    right = CSharpInterfaceCall(Vector3Instantiator);
 }
 
 
@@ -23,10 +24,8 @@ while(true)
 {
     sync
     {
-        right = CSharpInterfaceCall(Vector3);
+        
         right.x = 1 * UnityDeltaTime();
-        right.y *= UnityDeltaTime();
-        right.z *= UnityDeltaTime();
         cameraTransform.LookAt(targetTransform);
         cameraTransform.Translate(right);
     }

@@ -2,6 +2,23 @@ module UnitySystem;
 import System;
 using System;
 
+
+var GameObjectClass = new CSharpInterface();
+
+GameObjectClass.Type = "GameObject";
+
+GameObjectClass.ReturnClass = true;
+
+GameObject = CSharpInterfaceCall(GameObjectClass);
+
+var Vector3Class = new CSharpInterface();
+
+Vector3Class.Type = "Vector3";
+
+Vector3Class.ReturnClass = true;
+
+Vector3 = CSharpInterfaceCall(Vector3Class);
+
 var GameObject = new CSharpInterface();
 
 GameObject.Type = "GameObject";

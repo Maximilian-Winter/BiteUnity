@@ -3,15 +3,15 @@ import System;
 using System;
 
 
-var Vector3 = new CSharpInterface();
+var Vector3Instantiator = new CSharpInterface();
 
-Vector3.Type = "Vector3";
+Vector3Instantiator.Type = "Vector3";
 
-Vector3.ConstructorArguments[0] = 0.0;
-Vector3.ConstructorArgumentsTypes[0] = "float";
-Vector3.ConstructorArguments[1] = 0.0;
-Vector3.ConstructorArgumentsTypes[1] = "float";
-Vector3.ConstructorArguments[2] = 0.0;
-Vector3.ConstructorArgumentsTypes[2] = "float";
+Vector3Instantiator.ConstructorArguments[0] = 0.0;
+Vector3Instantiator.ConstructorArgumentsTypes[0] = "float";
+Vector3Instantiator.ConstructorArguments[1] = 0.0;
+Vector3Instantiator.ConstructorArgumentsTypes[1] = "float";
+Vector3Instantiator.ConstructorArguments[2] = 0.0;
+Vector3Instantiator.ConstructorArgumentsTypes[2] = "float";
 
 extern callable function UnityDeltaTime ();
