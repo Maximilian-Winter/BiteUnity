@@ -1,4 +1,6 @@
-# BiteUnity
+# OLD!!! BiteUnity Project
+
+New Project is here: https://github.com/Maximilian-Winter/BiteUnityExample
 
 This is a simple example on how to use the Bite Programming Language in conjunction with the Unity Game Engine.
 
